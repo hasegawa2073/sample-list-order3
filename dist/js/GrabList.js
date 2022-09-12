@@ -9,6 +9,13 @@ export const GrabList = () => {
     let diffTimeGrabDelay;
     const grabDelay = 200;
     todoLists.forEach((list) => {
+        const cancelGrab = () => {
+            if (diffTimeGrabDelay > 0) {
+                setTimeout(function () {
+                    list.classList.remove('grabbing');
+                }, diffTimeGrabDelay + 100);
+            }
+        };
         list.addEventListener('touchstart', function (e) {
             startTimeTouchStart = parseInt(e.timeStamp);
             setTimeout(function () {
@@ -23,14 +30,10 @@ export const GrabList = () => {
             totalTimeTouch = endTimeTouchEnd - startTimeTouchStart;
             list.classList.remove('grabbing');
             diffTimeGrabDelay = grabDelay - totalTimeTouch;
-            if (diffTimeGrabDelay > 0) {
-                setTimeout(function () {
-                    list.classList.remove('grabbing');
-                }, diffTimeGrabDelay + 100);
-            }
-            list.addEventListener('touchcancel', function (e) {
-                list.classList.remove('grabbing');
-            });
+            cancelGrab();
+        });
+        list.addEventListener('touchcancel', function (e) {
+            list.classList.remove('grabbing');
         });
         list.addEventListener('mousedown', function (e) {
             startTimeMouseDown = parseInt(e.timeStamp);
@@ -43,11 +46,7 @@ export const GrabList = () => {
             totalTimeMouseDown = endTimeMouseUp - startTimeMouseDown;
             list.classList.remove('grabbing');
             diffTimeGrabDelay = grabDelay - totalTimeMouseDown;
-            if (diffTimeGrabDelay > 0) {
-                setTimeout(function () {
-                    list.classList.remove('grabbing');
-                }, diffTimeGrabDelay + 100);
-            }
+            cancelGrab();
         });
         list.addEventListener('mouseleave', function (e) {
             list.classList.remove('grabbing');
