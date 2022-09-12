@@ -28,7 +28,7 @@ html {
     padding-left: 0;
     width: 100%;
     list-style-type: none;
-    overflow-x: hidden;
+    // overflow-x: hidden;
   }
   &__li {
     position: absolute;
@@ -39,13 +39,17 @@ html {
     width: 100%;
     background-color: #ffffff;
     cursor: grab;
+    transform: translateZ(0);
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
     &.grabbing {
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
       transform: scale(1.01);
       transform-origin: center center;
       background-color: rgba($color: #ffffff, $alpha: 0.8);
+      z-index: 100;
       cursor: grabbing;
       .todo__text {
+        z-index: 100;
         &::after {
           display: none;
         }

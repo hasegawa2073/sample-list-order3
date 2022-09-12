@@ -29,7 +29,6 @@ html {
   padding-left: 0;
   width: 100%;
   list-style-type: none;
-  overflow-x: hidden;
 }
 .todo__li {
   position: absolute;
@@ -40,13 +39,19 @@ html {
   width: 100%;
   background-color: #ffffff;
   cursor: grab;
+  transform: translateZ(0);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
 }
 .todo__li.grabbing {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
   transform: scale(1.01);
   transform-origin: center center;
   background-color: rgba(255, 255, 255, 0.8);
+  z-index: 100;
   cursor: grabbing;
+}
+.todo__li.grabbing .todo__text {
+  z-index: 100;
 }
 .todo__li.grabbing .todo__text::after {
   display: none;

@@ -1,4 +1,5 @@
 import { AddLiTop } from './AddLiTop.js';
+import { GrabList } from './GrabList.js';
 const UpdateUlHeight = import('./UpdateUlHeight.js');
 document.addEventListener('DOMContentLoaded', function () {
     // 読み込み時にulのheightを計算してスタイルを当てる
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // 読み込み時にliそれぞれのtopを計算してスタイルを当てる
     AddLiTop();
+    GrabList();
     window.addEventListener('resize', function () {
         // リサイズしたときulのheightを更新
         UpdateUlHeight.then((moduleObject) => {
