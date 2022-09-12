@@ -1,0 +1,87 @@
+html {
+  font-size: 62.5%;
+}
+:root {
+  --todo-padding: 0 22px 0 22px;
+  --todo-font-family: 'Noto Sans JP', sans-serif;
+  --title-font-size: 2.4rem;
+  --title-font-weight: 500;
+  --title-color: #ff7e07;
+  --text-font-size: 1.6rem;
+  --text-font-weight: 400;
+  --text-color: #252525;
+  --button-size: 22px;
+  --button-color: #bbbbbb;
+}
+.todo {
+  &__title {
+    margin: 24px 0 16px;
+    padding: var(--todo-padding);
+    font-family: var(--todo-font-family);
+    font-size: var(--title-font-size);
+    font-weight: var(--title-font-weight);
+    color: var(--title-color);
+  }
+  &__ul {
+    position: relative;
+    margin: 0;
+    padding-left: 0;
+    width: 100%;
+    list-style-type: none;
+    // overflow-x: hidden;
+  }
+  &__li {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: var(--todo-padding);
+    width: 100%;
+    background-color: #ffffff;
+    cursor: grab;
+    &.grabbing {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+      transform: scale(1.01);
+      transform-origin: center center;
+      background-color: rgba($color: #ffffff, $alpha: 0.8);
+      cursor: grabbing;
+      .todo__text {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+  &__button {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0;
+    width: var(--button-size);
+    height: var(--button-size);
+    background-color: transparent;
+    border: 1px solid var(--button-color);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__text {
+    position: relative;
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 16px 0 16px 0;
+    width: 100%;
+    font-family: var(--todo-font-family);
+    font-size: var(--text-font-size);
+    font-weight: var(--text-font-weight);
+    color: var(--text-color);
+    &::after {
+      content: '';
+      position: absolute;
+      right: -20px;
+      bottom: 0;
+      display: block;
+      width: calc(100% + 20px);
+      height: 1px;
+      background-color: #e7e7e7;
+    }
+  }
+}
