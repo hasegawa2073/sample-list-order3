@@ -1,0 +1,19 @@
+{
+  "name": "sample-list-order3",
+  "version": "1.0.0",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasegawa2073/sample-list-order3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hasegawa2073/sample-list-order3/issues"
+  },
+  "homepage": "https://github.com/hasegawa2073/sample-list-order3#readme",
+  "devDependencies": {
+    "sass": "^1.54.9",
+    "typescript": "^4.8.3"
+  }
+}
