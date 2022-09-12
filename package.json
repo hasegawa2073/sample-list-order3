@@ -1,7 +1,11 @@
 {
   "name": "sample-list-order3",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "watch": "npm run watch:sass & npm run watch:ts",
+    "watch:sass": "sass src/scss/:dist/css/ --no-source-map --watch",
+    "watch:ts": "tsc -watch"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hasegawa2073/sample-list-order3.git"
