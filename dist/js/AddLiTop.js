@@ -10,6 +10,7 @@ export const AddLiTop = () => {
         return accu + curr;
     }, 0);
     todoLists.forEach((list, i) => {
+        list.style.left = '0px';
         list.style.top = `${listTopArray[i]}px`;
     });
 };
