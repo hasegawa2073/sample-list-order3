@@ -1,8 +1,11 @@
 export const Sort = () => {
     const todoUl = document.querySelector('.todo__ul');
     const todoLists = document.querySelectorAll('.todo__li');
+    let startTouchY;
     let startMouseY;
+    let currentTouchY;
     let currentMouseY;
+    let moveTouchY;
     let moveMouseY;
     let startTargetTop;
     let targetTop;
@@ -41,6 +44,25 @@ export const Sort = () => {
         });
     };
     todoLists.forEach((list) => {
+        list.addEventListener('touchstart', function (e) {
+            startTouchY = e.pageY;
+            startTargetTop = parseInt(list.style.top);
+        });
+        list.addEventListener('touchmove', function (e) {
+            currentTouchY = e.pageY;
+            moveTouchY = currentTouchY - startTouchY;
+            targetTop = startTargetTop + moveTouchY;
+            setListTop(topOrderListArray(listsArray));
+            if (list.classList.contains('grabbing')) {
+                list.style.top = `${targetTop}px`;
+            }
+        });
+        list.addEventListener('touchend', function (e) {
+            setListTop(topOrderListArray(listsArray));
+            setTimeout(function () {
+                topOrderAppendDOM(topOrderListArray(listsArray));
+            }, 1000);
+        });
         list.addEventListener('mousedown', function (e) {
             startMouseY = e.clientY;
             startTargetTop = parseInt(list.style.top);

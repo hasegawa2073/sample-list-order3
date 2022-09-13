@@ -1,8 +1,11 @@
 export const Sort = () => {
   const todoUl = document.querySelector<HTMLLIElement>('.todo__ul');
   const todoLists = document.querySelectorAll<HTMLLIElement>('.todo__li');
+  let startTouchY: number;
   let startMouseY: number;
+  let currentTouchY: number;
   let currentMouseY: number;
+  let moveTouchY: number;
   let moveMouseY: number;
   let startTargetTop: number;
   let targetTop: number;
@@ -44,6 +47,25 @@ export const Sort = () => {
   };
 
   todoLists.forEach((list) => {
+    list.addEventListener('touchstart', function (e: any) {
+      startTouchY = e.pageY;
+      startTargetTop = parseInt(list.style.top);
+    });
+    list.addEventListener('touchmove', function (e: any) {
+      currentTouchY = e.pageY;
+      moveTouchY = currentTouchY - startTouchY;
+      targetTop = startTargetTop + moveTouchY;
+      setListTop(topOrderListArray(listsArray));
+      if (list.classList.contains('grabbing')) {
+        list.style.top = `${targetTop}px`;
+      }
+    });
+    list.addEventListener('touchend', function (e: any) {
+      setListTop(topOrderListArray(listsArray));
+      setTimeout(function () {
+        topOrderAppendDOM(topOrderListArray(listsArray));
+      }, 1000);
+    });
     list.addEventListener('mousedown', function (e: any) {
       startMouseY = e.clientY;
       startTargetTop = parseInt(list.style.top);
@@ -52,9 +74,7 @@ export const Sort = () => {
       currentMouseY = e.clientY;
       moveMouseY = currentMouseY - startMouseY;
       targetTop = startTargetTop + moveMouseY;
-
       setListTop(topOrderListArray(listsArray));
-
       if (list.classList.contains('grabbing')) {
         list.style.top = `${targetTop}px`;
       }
