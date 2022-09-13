@@ -1,4 +1,5 @@
 export const Sort = () => {
+    const todoUl = document.querySelector('.todo__ul');
     const todoLists = document.querySelectorAll('.todo__li');
     let startMouseY;
     let currentMouseY;
@@ -27,11 +28,16 @@ export const Sort = () => {
         const listHeightArray = new Array();
         topOrderListArray.forEach((list) => {
             listHeightArray.push(list.clientHeight);
-            console.log(listHeightArray);
             listHeightArray.reduce((accu, curr) => {
                 list.style.top = `${accu}px`;
                 return accu + curr;
             }, 0);
+        });
+    };
+    // 並び順とDOMの順番を揃える処理
+    const topOrderAppendDOM = (topOrderListArray) => {
+        topOrderListArray.forEach((list) => {
+            todoUl?.append(list);
         });
     };
     todoLists.forEach((list) => {
@@ -47,6 +53,12 @@ export const Sort = () => {
             if (list.classList.contains('grabbing')) {
                 list.style.top = `${targetTop}px`;
             }
+        });
+        list.addEventListener('mouseup', function (e) {
+            setListTop(topOrderListArray(listsArray));
+            setTimeout(function () {
+                topOrderAppendDOM(topOrderListArray(listsArray));
+            }, 1000);
         });
     });
 };
