@@ -11,6 +11,5 @@ export const AddLiTop = () => {
     }, 0);
     todoLists.forEach((list, i) => {
         list.style.top = `${listTopArray[i]}px`;
-        list.style.left = '0px';
     });
 };
